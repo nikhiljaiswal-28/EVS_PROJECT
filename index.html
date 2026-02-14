@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ═══════════════════════════════════════════
+         PRIMARY META
+    ═══════════════════════════════════════════ -->
+    <title>AirPulse — Real-Time Air Quality Monitor for India</title>
+    <meta name="description" content="AirPulse gives you live AQI data, health alerts, and personalized safety advice for 50+ Indian cities. Protecting families across India, one breath at a time.">
+    <meta name="keywords" content="air quality India, AQI India, air pollution monitor, Delhi AQI, Mumbai air quality, India breathes safe, AirPulse, PM2.5 India">
+    <meta name="author" content="AirPulse">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#10b981">
+    <meta name="color-scheme" content="light dark">
+
+    <!-- ═══════════════════════════════════════════
+         CANONICAL & LANGUAGE
+    ═══════════════════════════════════════════ -->
+    <link rel="canonical" href="https://airpulse.in/">
+    <meta name="geo.region" content="IN">
+    <meta name="geo.country" content="India">
+    <html lang="en-IN">
+
+    <!-- ═══════════════════════════════════════════
+         OPEN GRAPH (WhatsApp, Facebook, LinkedIn)
+    ═══════════════════════════════════════════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://airpulse.in/">
+    <meta property="og:title" content="AirPulse — Real-Time Air Quality Monitor for India 🇮🇳">
+    <meta property="og:description" content="Live AQI data, health alerts & personalized safety advice for 50+ Indian cities. Know before you breathe.">
+    <meta property="og:image" content="https://airpulse.in/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="AirPulse">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- ═══════════════════════════════════════════
+         TWITTER / X CARD
+    ═══════════════════════════════════════════ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@AirPulseIndia">
+    <meta name="twitter:title" content="AirPulse — Real-Time Air Quality for India 🇮🇳">
+    <meta name="twitter:description" content="Live AQI, health alerts & safety tips for 50+ Indian cities. Protecting families, one breath at a time.">
+    <meta name="twitter:image" content="https://airpulse.in/og-image.png">
+
+    <!-- ═══════════════════════════════════════════
+         FAVICON — inline SVG (works everywhere,
+         no external file needed)
+    ═══════════════════════════════════════════ -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2310b981'/><path d='M20 55 L32 55 L36 38 L44 72 L52 25 L60 78 L68 55 L80 55' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2310b981'/><path d='M20 55 L32 55 L36 38 L44 72 L52 25 L60 78 L68 55 L80 55' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <meta name="apple-mobile-web-app-title" content="AirPulse">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- ═══════════════════════════════════════════
+         PWA MANIFEST (makes it installable)
+    ═══════════════════════════════════════════ -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- ═══════════════════════════════════════════
+         STRUCTURED DATA (Google rich results)
+    ═══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AirPulse",
+        "url": "https://airpulse.in",
+        "description": "Real-time air quality monitoring for 50+ Indian cities with health alerts and personalized safety advice.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+        "author": { "@type": "Organization", "name": "AirPulse", "url": "https://airpulse.in" },
+        "keywords": "air quality, AQI, India, pollution, health, safety",
+        "inLanguage": "en-IN",
+        "countriesSupported": "IN"
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════
+         PERFORMANCE
+    ═══════════════════════════════════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://api.openweathermap.org">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- ═══════════════════════════════════════════
+         FONTS & LIBRARIES
+    ═══════════════════════════════════════════ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+    </div>
+    
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo animate__animated animate__fadeInDown">
+                    <div class="logo-icon pulse-icon">
+                        <svg viewBox="0 0 50 50" class="pulse-svg">
+                            <path class="heartbeat-line" d="M 5 25 L 15 25 L 18 15 L 22 35 L 26 10 L 30 40 L 34 25 L 45 25" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="25" cy="40" r="2" fill="white" opacity="0.6"/>
+                            <circle cx="20" cy="38" r="1.5" fill="white" opacity="0.4"/>
+                            <circle cx="30" cy="38" r="1.5" fill="white" opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">AirPulse</span>
+                        <span class="logo-subtitle">🇮🇳 INDIA BREATHES SAFE</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="nav-container">
+                <ul class="nav-menu">
+                    <li class="nav-item active" data-tab="dashboard">
+                        <div class="nav-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <span class="nav-text">Dashboard</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="location">
+                        <div class="nav-icon"><i class="fas fa-location-arrow"></i></div>
+                        <span class="nav-text">My Location</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="cities">
+                        <div class="nav-icon"><i class="fas fa-city"></i></div>
+                        <span class="nav-text">Explore Cities</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="comparison">
+                        <div class="nav-icon"><i class="fas fa-balance-scale"></i></div>
+                        <span class="nav-text">Compare</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="trends">
+                        <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+                        <span class="nav-text">Trends</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="map">
+                        <div class="nav-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <span class="nav-text">Live Map</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="health">
+                        <div class="nav-icon"><i class="fas fa-heartbeat"></i></div>
+                        <span class="nav-text">Health Impact</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="alerts">
+                        <div class="nav-icon"><i class="fas fa-bell"></i></div>
+                        <span class="nav-text">Alerts</span>
+                        <span class="alert-badge" id="alertBadge">0</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="about">
+                        <div class="nav-icon"><i class="fas fa-info-circle"></i></div>
+                        <span class="nav-text">About AQI</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="safety">
+                        <div class="nav-icon"><i class="fas fa-shield-alt"></i></div>
+                        <span class="nav-text">Safety Guide</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="rankings">
+                        <div class="nav-icon"><i class="fas fa-trophy"></i></div>
+                        <span class="nav-text">India Rankings</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="forecast">
+                        <div class="nav-icon"><i class="fas fa-cloud-sun"></i></div>
+                        <span class="nav-text">5-Day Forecast</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="sources">
+                        <div class="nav-icon"><i class="fas fa-industry"></i></div>
+                        <span class="nav-text">Pollution Sources</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-tab="reportcard">
+                        <div class="nav-icon"><i class="fas fa-file-medical-alt"></i></div>
+                        <span class="nav-text">Health Report</span>
+                        <div class="nav-indicator"></div>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <span>Dark Mode</span>
+                    </button>
+                </div>
+                <div class="footer-info">
+                    <p><i class="fas fa-code"></i> Version 6.0.0</p>
+                    <p><i class="fas fa-heart" style="color: #ef4444;"></i> Made in India</p>
+                    <p style="font-size: 0.7rem; opacity: 0.7; margin-top: 0.5rem;">Protecting Families,<br>One Breath at a Time</p>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                    <div class="header-info">
+                        <h1 class="header-title">Air Quality Monitor</h1>
+                        <div class="header-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i><span id="currentTime">--:--</span></span>
+                            <span class="meta-item"><i class="fas fa-calendar-day"></i><span id="currentDate">--</span></span>
+                            <span class="meta-item"><div class="status-dot"></div><span>Live Data</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn" id="refreshBtn" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    <button class="action-btn" id="notificationBtn" title="Notifications"><i class="fas fa-bell"></i><span class="notification-badge">3</span></button>
+                    <button class="action-btn" id="exportBtn" title="Export Report"><i class="fas fa-download"></i></button>
+                </div>
+            </header>
+            
+            <section id="dashboardSection" class="content-section active">
+                <div class="welcome-card animate__animated animate__fadeInUp">
+                    <div class="welcome-content">
+                        <h2>Welcome to AirPulse 🇮🇳</h2>
+                        <p>Protecting families across India, one breath at a time</p>
+                    </div>
+                    <button class="auto-detect-btn" id="autoDetectBtn">
+                        <i class="fas fa-crosshairs"></i><span>Find My Air Quality</span>
+                    </button>
+                </div>
+                
+                <div class="search-card animate__animated animate__fadeInUp">
+                    <h3 class="section-title"><i class="fas fa-search"></i>Check Your City</h3>
+                    <div class="search-wrapper">
+                        <div class="search-input-group">
+                            <i class="fas fa-map-marker-alt search-icon"></i>
+                            <input type="text" id="cityInput" class="search-input" placeholder="Enter your city name (Mumbai, Delhi, Bangalore...)" autocomplete="off">
+                            <div class="autocomplete-list" id="autocompleteList"></div>
+                        </div>
+                        <button class="search-btn" id="checkBtn"><i class="fas fa-search"></i><span>Check Safety Now</span></button>
+                    </div>
+                    
+                    <div class="quick-access">
+                        <span class="quick-label">Popular Cities:</span>
+                        <div class="city-pills">
+                            <button class="city-pill" data-city="Mumbai"><i class="fas fa-map-pin"></i>Mumbai</button>
+                            <button class="city-pill" data-city="Delhi"><i class="fas fa-map-pin"></i>Delhi</button>
+                            <button class="city-pill" data-city="Bangalore"><i class="fas fa-map-pin"></i>Bangalore</button>
+                            <button class="city-pill" data-city="Chennai"><i class="fas fa-map-pin"></i>Chennai</button>
+                            <button class="city-pill" data-city="Kolkata"><i class="fas fa-map-pin"></i>Kolkata</button>
+                            <button class="city-pill" data-city="Hyderabad"><i class="fas fa-map-pin"></i>Hyderabad</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="aqiDashboard" class="aqi-dashboard" style="display: none;">
+                    <div class="city-info-card animate__animated animate__fadeInUp">
+                        <div class="city-header">
+                            <div class="city-details">
+                                <h2 class="city-name" id="cityName">City Name</h2>
+                                <p class="city-location"><i class="fas fa-map-marker-alt"></i><span id="cityState">State</span>, India</p>
+                            </div>
+                            <div class="city-actions">
+                                <button class="action-icon-btn" id="favoriteBtn" title="Save This City"><i class="far fa-heart"></i></button>
+                                <button class="action-icon-btn" id="shareBtn" title="Share"><i class="fas fa-share-alt"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="aqi-main-display">
+                            <div class="aqi-gauge">
+                                <div class="gauge-container">
+                                    <svg viewBox="0 0 200 200" class="gauge-svg">
+                                        <defs>
+                                            <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                                            </linearGradient>
+                                        </defs>
+                                        <circle class="gauge-bg" cx="100" cy="100" r="80"></circle>
+                                        <circle id="gaugeProgress" class="gauge-progress" cx="100" cy="100" r="80"></circle>
+                                    </svg>
+                                    <div class="gauge-center">
+                                        <div class="aqi-value" id="aqiValue">0</div>
+                                        <div class="aqi-label">AQI</div>
+                                    </div>
+                                </div>
+                                <div class="aqi-status" id="aqiStatus">Good</div>
+                            </div>
+                            
+                            <div class="weather-stats">
+                                <div class="stat-item">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fas fa-temperature-high"></i></div>
+                                    <div class="stat-content"><div class="stat-label">Temperature</div><div class="stat-value"><span id="temp">--</span>°C</div></div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"><i class="fas fa-tint"></i></div>
+                                    <div class="stat-content"><div class="stat-label">Humidity</div><div class="stat-value"><span id="humidity">--</span>%</div></div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-wind"></i></div>
+                                    <div class="stat-content"><div class="stat-label">Wind Speed</div><div class="stat-value"><span id="wind">--</span> km/h</div></div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);"><i class="fas fa-smog"></i></div>
+                                    <div class="stat-content"><div class="stat-label">PM2.5</div><div class="stat-value"><span id="pm25Main">--</span></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pollutants-grid animate__animated animate__fadeInUp">
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <div class="pollutant-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);"><i class="fas fa-smog"></i></div>
+                                <div class="pollutant-info"><h4>PM2.5</h4><p>Fine Dust Particles</p></div>
+                            </div>
+                            <div class="pollutant-value"><span id="pm25">0</span><span class="unit">µg/m³</span></div>
+                            <div class="pollutant-bar"><div class="pollutant-progress" id="pm25Progress"></div></div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <div class="pollutant-icon" style="background: linear-gradient(135deg, #fb923c, #f97316);"><i class="fas fa-cloud"></i></div>
+                                <div class="pollutant-info"><h4>PM10</h4><p>Coarse Particles</p></div>
+                            </div>
+                            <div class="pollutant-value"><span id="pm10">0</span><span class="unit">µg/m³</span></div>
+                            <div class="pollutant-bar"><div class="pollutant-progress" id="pm10Progress"></div></div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <div class="pollutant-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"><i class="fas fa-sun"></i></div>
+                                <div class="pollutant-info"><h4>O₃</h4><p>Ozone</p></div>
+                            </div>
+                            <div class="pollutant-value"><span id="o3">0</span><span class="unit">µg/m³</span></div>
+                            <div class="pollutant-bar"><div class="pollutant-progress" id="o3Progress"></div></div>
+                        </div>
+                        <div class="pollutant-card">
+                            <div class="pollutant-header">
+                                <div class="pollutant-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"><i class="fas fa-car"></i></div>
+                                <div class="pollutant-info"><h4>NO₂</h4><p>Vehicle Emissions</p></div>
+                            </div>
+                            <div class="pollutant-value"><span id="no2">0</span><span class="unit">µg/m³</span></div>
+                            <div class="pollutant-bar"><div class="pollutant-progress" id="no2Progress"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="health-advisory animate__animated animate__fadeInUp">
+                        <h3 class="section-title"><i class="fas fa-shield-alt"></i>What This Means For You</h3>
+                        <div class="advisory-cards">
+                            <div class="advisory-card">
+                                <div class="advisory-icon"><i class="fas fa-users"></i></div>
+                                <div class="advisory-content"><h4>Everyone</h4><p id="adviceGeneral">Loading...</p></div>
+                            </div>
+                            <div class="advisory-card">
+                                <div class="advisory-icon"><i class="fas fa-running"></i></div>
+                                <div class="advisory-content"><h4>Outdoor Activities</h4><p id="adviceOutdoor">Loading...</p></div>
+                            </div>
+                            <div class="advisory-card">
+                                <div class="advisory-icon"><i class="fas fa-home"></i></div>
+                                <div class="advisory-content"><h4>Indoor Safety</h4><p id="adviceIndoor">Loading...</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card animate__animated animate__fadeInUp">
+                        <h3 class="section-title"><i class="fas fa-chart-bar"></i>Pollutant Breakdown</h3>
+                        <div class="chart-container"><canvas id="pollutantChart"></canvas></div>
+                    </div>
+                </div>
+                
+                <div class="favorites-section animate__animated animate__fadeInUp">
+                    <h3 class="section-title"><i class="fas fa-star"></i>Saved Cities</h3>
+                    <div class="favorites-grid" id="favoritesGrid"></div>
+                </div>
+            </section>
+            
+            <section id="locationSection" class="content-section">
+                <div class="location-auto-detect">
+                    <div class="auto-detect-card animate__animated animate__fadeInUp">
+                        <div class="detect-icon"><i class="fas fa-location-arrow"></i></div>
+                        <h2>Find Your Air Quality</h2>
+                        <p>Get instant air quality data for your current location</p>
+                        <button class="detect-btn" id="detectLocationBtn"><i class="fas fa-crosshairs"></i><span>Detect My Location</span></button>
+                    </div>
+                </div>
+                <div id="locationData"></div>
+            </section>
+            
+            <section id="citiesSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-city"></i>Explore Indian Cities</h3>
+                <div class="cities-grid" id="citiesGrid"></div>
+            </section>
+            
+            <section id="comparisonSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-balance-scale"></i>Compare Cities</h3>
+                <div id="comparisonSelector"></div>
+                <div class="comparison-grid" id="comparisonGrid"></div>
+            </section>
+            
+            <section id="trendsSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-chart-line"></i>Air Quality Trends</h3>
+                <div class="chart-card"><canvas id="trendsChart"></canvas></div>
+            </section>
+            
+            <section id="mapSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-map-marked-alt"></i>Live Air Quality Map</h3>
+                <div id="map" class="map-container"></div>
+            </section>
+            
+            <section id="healthSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-heartbeat"></i>How Air Pollution Affects Health</h3>
+                <div class="health-info-grid">
+                    <div class="health-info-card"><i class="fas fa-lungs"></i><h4>Your Lungs</h4><p>Fine dust particles can penetrate deep into lungs, causing breathing problems and long-term damage.</p></div>
+                    <div class="health-info-card"><i class="fas fa-heart"></i><h4>Your Heart</h4><p>Long-term exposure increases the risk of heart disease, heart attacks, and strokes.</p></div>
+                    <div class="health-info-card"><i class="fas fa-baby"></i><h4>Children & Seniors</h4><p>Kids and elderly need extra protection - their bodies are more vulnerable to pollution.</p></div>
+                    <div class="health-info-card"><i class="fas fa-brain"></i><h4>Mental Health</h4><p>Air pollution can affect mood, concentration, and cognitive function over time.</p></div>
+                </div>
+            </section>
+            
+            <section id="alertsSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-bell"></i>Air Quality Alerts</h3>
+                <div id="alertsList"></div>
+            </section>
+            
+            <section id="aboutSection" class="content-section">
+                <div class="about-content">
+                    <h2>Understanding Air Quality Index (AQI)</h2>
+                    <p>Learn what the numbers mean and how to protect yourself and your family</p>
+                    <div class="aqi-scale-grid">
+                        <div class="aqi-scale-item good"><div class="scale-range">0-50</div><div class="scale-label">Good</div><p>✅ Perfect day to step outside!</p></div>
+                        <div class="aqi-scale-item moderate"><div class="scale-range">51-100</div><div class="scale-label">Moderate</div><p>⚠️ Generally safe for most people</p></div>
+                        <div class="aqi-scale-item sensitive"><div class="scale-range">101-150</div><div class="scale-label">Unhealthy for Sensitive</div><p>⚠️ Kids, seniors should be cautious</p></div>
+                        <div class="aqi-scale-item unhealthy"><div class="scale-range">151-200</div><div class="scale-label">Unhealthy</div><p>❌ Everyone should limit outdoor time</p></div>
+                        <div class="aqi-scale-item very-unhealthy"><div class="scale-range">201-300</div><div class="scale-label">Very Unhealthy</div><p>❌ Stay indoors - serious health risk</p></div>
+                        <div class="aqi-scale-item hazardous"><div class="scale-range">301+</div><div class="scale-label">Hazardous</div><p>🚫 EMERGENCY - stay inside!</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="safetySection" class="content-section">
+                <div class="welcome-card animate__animated animate__fadeInUp">
+                    <div class="welcome-content">
+                        <h2><i class="fas fa-shield-alt"></i> Personalized Safety Guide</h2>
+                        <p>Get specific health recommendations based on your needs</p>
+                    </div>
+                </div>
+
+                <div class="search-card animate__animated animate__fadeInUp" style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 20px; border-radius: 12px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 36px; font-weight: bold; color: white;" id="safetyAqi">--</div>
+                            <div style="color: white; font-size: 12px; opacity: 0.9;">CURRENT AQI</div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 18px; font-weight: 600; margin-bottom: 5px;" id="safetyStatus">Search for a city to view safety guidelines</div>
+                            <div style="color: #6b7280; font-size: 14px;">Personalized recommendations for vulnerable groups</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-access" style="margin-bottom: 20px;">
+                    <span class="quick-label">Choose Your Group:</span>
+                    <div class="city-pills">
+                        <button class="city-pill safety-tab active" data-group="children" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-color: #3b82f6;">
+                            <i class="fas fa-child"></i> Protecting Our Kids (0-12)
+                        </button>
+                        <button class="city-pill safety-tab" data-group="elderly" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border-color: #8b5cf6;">
+                            <i class="fas fa-user-clock"></i> Caring for Seniors (65+)
+                        </button>
+                        <button class="city-pill safety-tab" data-group="respiratory" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; border-color: #06b6d4;">
+                            <i class="fas fa-lungs"></i> Asthma & Breathing
+                        </button>
+                        <button class="city-pill safety-tab" data-group="cardiovascular" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border-color: #ef4444;">
+                            <i class="fas fa-heartbeat"></i> Heart Health
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-card animate__animated animate__fadeInUp" id="safetyContent">
+                    <div style="text-align: center; padding: 40px; color: #9ca3af;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 48px; margin-bottom: 16px;"></i>
+                        <h3>No City Selected</h3>
+                        <p>Search for a city above to see personalized safety recommendations for your selected group</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════ INDIA RANKINGS ═══════════════ -->
+            <section id="rankingsSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-trophy"></i> India City Rankings</h3>
+                <div style="display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;" id="rankingsFilterBar">
+                    <button class="rankings-filter active" data-filter="all"   onclick="setRankingsFilter('all')">🌍 All Cities</button>
+                    <button class="rankings-filter"        data-filter="best"  onclick="setRankingsFilter('best')">🏆 Cleanest</button>
+                    <button class="rankings-filter"        data-filter="worst" onclick="setRankingsFilter('worst')">⚠️ Most Polluted</button>
+                </div>
+                <div id="rankingsList"></div>
+            </section>
+
+            <!-- ═══════════════ 5-DAY FORECAST ═══════════════ -->
+            <section id="forecastSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-cloud-sun"></i> 5-Day AQI Forecast</h3>
+                <div id="forecastNoCityMsg" style="text-align:center;padding:4rem 2rem;color:#9ca3af;">
+                    <i class="fas fa-cloud-sun" style="font-size:3rem;margin-bottom:1rem;opacity:0.4;display:block;"></i>
+                    <h3>No City Selected</h3>
+                    <p>Search for a city on the Dashboard first to see its forecast.</p>
+                </div>
+                <div id="forecastContent" style="display:none;">
+                    <div id="forecastCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem;"></div>
+                    <div class="chart-card" style="padding:1.5rem;">
+                        <h4 style="margin:0 0 1rem;font-size:0.9rem;font-weight:700;color:var(--text-secondary);">
+                            <i class="fas fa-chart-area" style="margin-right:6px;"></i>AQI Trend Over 5 Days
+                        </h4>
+                        <div style="height:260px;position:relative;"><canvas id="forecastChart"></canvas></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════ POLLUTION SOURCES ═══════════════ -->
+            <section id="sourcesSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-industry"></i> Pollution Sources</h3>
+                <div id="sourcesNoCityMsg" style="text-align:center;padding:4rem 2rem;color:#9ca3af;">
+                    <i class="fas fa-industry" style="font-size:3rem;margin-bottom:1rem;opacity:0.4;display:block;"></i>
+                    <h3>No City Selected</h3>
+                    <p>Search for a city to see what's causing its pollution today.</p>
+                </div>
+                <div id="sourcesContent" style="display:none;"></div>
+            </section>
+
+            <!-- ═══════════════ HEALTH REPORT CARD ═══════════════ -->
+            <section id="reportcardSection" class="content-section">
+                <h3 class="section-title"><i class="fas fa-file-medical-alt"></i> My Health Report Card</h3>
+                <div id="reportNoCityMsg" style="text-align:center;padding:4rem 2rem;color:#9ca3af;">
+                    <i class="fas fa-file-medical-alt" style="font-size:3rem;margin-bottom:1rem;opacity:0.4;display:block;"></i>
+                    <h3>No City Selected</h3>
+                    <p>Search for a city on the Dashboard to generate your personalized report.</p>
+                </div>
+                <div id="reportCardContent" style="display:none;"></div>
+            </section>
+
+        </main>
+    </div>
+    
+    <div class="loader-overlay" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p id="loaderText">Loading...</p>
+        </div>
+    </div>
+    
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
